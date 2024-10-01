@@ -1,0 +1,3 @@
+rootProject.name = 'Laborator7'
+
+include 'Model'

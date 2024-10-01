@@ -1,0 +1,68 @@
+syntax="proto3";
+package proto;
+
+option java_package = "ro.mpp2024.protobuffprotocol";
+option java_outer_classname = "Protocol";
+
+
+
+message UserDTO {
+    string name = 1;
+    string password = 2;
+}
+
+message MatchDTO {
+    int32 id = 1;
+    string type = 2;
+    int32 availableSeats = 3;
+    int32 team1ID = 4;
+    int32 team2ID = 5;
+    int32 seatPrice = 6;
+}
+
+message BuyTicketsDTO {
+  int32 matchID = 1;
+  int32 price = 2;
+  string clientName = 3;
+  int32 numberOfSeats = 4;
+}
+
+
+message Request{
+    enum RequestType{
+        LOGIN = 0;
+  	LOGOUT = 1;
+  	SIGNUP = 2;
+  	GET_MATCHES = 3;
+  	BUY_TICKETS = 4;
+  	GET_MATCH = 5;
+    }
+
+    RequestType request_type = 1;
+
+    oneof data {
+        UserDTO userdto = 2;
+        string username = 3;
+        string filtru = 4;
+	int32 idUser = 5;
+        BuyTicketsDTO ticketdto = 6;
+    }
+}
+
+
+message Response {
+    enum ResponseType{
+        OK = 0;
+        ERROR = 1;
+        UPDATE = 2;
+        GET_MATCHES = 3;
+        GET_MATCH = 4;
+    }
+
+    ResponseType response_type = 1;
+    string error = 2;
+    UserDTO userdto = 3;
+    MatchDTO matchdto = 4;
+    repeated string matches = 5;
+
+}
